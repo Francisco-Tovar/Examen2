@@ -30,8 +30,6 @@ public class ConsultorService {
         consultorRepository.save(consultor);
     }
 
-    public void delete(int id){
-        consultorRepository.deleteById(Long.valueOf(id));
-    }
+
 
 }

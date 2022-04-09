@@ -18,16 +18,19 @@ public class Consultor {
     private Date dob;
     private String telPersonal;
     private String email;
-    private String disponibilidad;
+    private Boolean disponibilidad;
     private String especialidad;
+    private boolean estatus;
 
     @Transient
     private SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 
-    public Consultor() {    }
+    public Consultor() {
+        this.estatus = true;
+    }
 
     public Consultor(String nombre, String apellido1, String apellido2, String direccion, String telefono,
-                     String dob, String telPersonal, String email, String disponibilidad, String especialidad) throws ParseException {
+                     String dob, String telPersonal, String email, boolean disponibilidad, String especialidad) throws ParseException {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
@@ -38,6 +41,7 @@ public class Consultor {
         this.email = email;
         this.disponibilidad = disponibilidad;
         this.especialidad = especialidad;
+        this.estatus = true;
     }
 
     public Long getId() {
@@ -116,14 +120,6 @@ public class Consultor {
         this.email = email;
     }
 
-    public String getDisponibilidad() {
-        return disponibilidad;
-    }
-
-    public void setDisponibilidad(String disponibilidad) {
-        this.disponibilidad = disponibilidad;
-    }
-
     public String getEspecialidad() {
         return especialidad;
     }
@@ -132,19 +128,34 @@ public class Consultor {
         this.especialidad = especialidad;
     }
 
+    public boolean isEstatus() {
+        return estatus;
+    }
+    public void setEstatus(Boolean estatus) {
+        this.estatus = estatus;
+    }
+
+    public Boolean getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(Boolean disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
     @Override
     public String toString() {
         return "Consultor{" +
-                "nombre='" + nombre + '\'' +
-                ", apellido1='" + apellido1 + '\'' +
-                ", apellido2='" + apellido2 + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", dob=" + getDateString() + '\'' +
-                ", telPersonal='" + telPersonal + '\'' +
-                ", email='" + email + '\'' +
-                ", disponibilidad='" + disponibilidad + '\'' +
-                ", especialidad='" + especialidad + '\'' +
+                "nombre='" + nombre + + '\n'+
+                ", apellido1='" + apellido1 +  '\n'+
+                ", apellido2='" + apellido2 +  '\n'+
+                ", direccion='" + direccion +  '\n'+
+                ", telefono='" + telefono +  '\n'+
+                ", fecha de nacimiento=" + getDateString() +  '\n'+
+                ", telefono Personal='" + telPersonal +  '\n'+
+                ", email='" + email +  '\n'+
+                ", disponibilidad='" + disponibilidad.toString() +  '\n'+
+                ", especialidad='" + especialidad +  '\n'+
                 '}';
     }
 }
