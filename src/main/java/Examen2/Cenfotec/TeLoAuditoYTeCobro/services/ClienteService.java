@@ -30,6 +30,7 @@ public class ClienteService {
         clienteRepository.save(cliente);
     }
 
+
     public void delete(int id){
         clienteRepository.deleteById(Long.valueOf(id));
     }

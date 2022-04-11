@@ -17,9 +17,12 @@ public class Cliente {
     @JoinColumn(name = "CONTACTO_ID", referencedColumnName = "ID")
     private List<Contacto> contactos;
 
-    public Cliente() {  }
+    public Cliente() {
+        this.contactos = new ArrayList<Contacto>();
+    }
 
-    public Cliente(Long id, String razonSocial, String cedulaJuridica, String direccion, String telefono, ArrayList<Contacto> contactos) {
+    public Cliente(Long id, String razonSocial, String cedulaJuridica,
+                   String direccion, String telefono, List<Contacto> contactos) {
         this.id = id;
         this.razonSocial = razonSocial;
         this.cedulaJuridica = cedulaJuridica;
@@ -72,8 +75,12 @@ public class Cliente {
         return contactos;
     }
 
-    public void setContactos(ArrayList<Contacto> contactos) {
+    public void setContactos(List<Contacto> contactos) {
         this.contactos = contactos;
+    }
+
+    public void addContacto(Contacto contacto){
+        this.contactos.add(contacto);
     }
 
     public String getAllContacts(){

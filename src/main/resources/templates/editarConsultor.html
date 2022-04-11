@@ -7,10 +7,9 @@
 </head>
 <body>
 <div>
-    <h1>Registro de consultores</h1>
-
+    <h1>Edicion de consultores</h1>
     <p>------------- <a href="/">Cancelar</a> -------------</p>
-    <form action="#" th:action="@{/registrarConsultor}" th:object="${consultor}" method="post">
+    <form action="#" th:action="@{/editarConsultor/{id}(id=${id})}" th:object="${consultor}" method="post">
         <div style="display: flex; flex-direction: column; max-width: 50%">
             <label for="nombre">Nombre</label>
             <input type="text" th:field="*{nombre}" id="nombre"/>
@@ -48,13 +47,13 @@
                         th:text="${especialidad}" ></option>
             </select>
 
-            <label for="estatus">Activo</label>
+            <label for="estatus">Estado</label>
             <select th:field="*{estatus}" class="form-control" id="estatus">
                 <option th:each="estatus : ${status}" th:value="${estatus}"
                         th:text="${estatus}" ></option>
             </select>
 
-            <input type="submit" value="Registrar" >
+            <input type="submit" value="Aceptar cambios" >
         </div>
 
     </form>

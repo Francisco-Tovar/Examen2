@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"></meta>
+  <meta http-equiv="Content-Type" content="text/html"></meta>
+  <title>TAyTC</title>
+</head>
+<body>
+<div>
+  <h1>Listado de contactos</h1>
+  <a href="/"> Volver al inicio </a>
+  <ul>
+    <div th:each="entry,status : ${contactos}">
+      <li>
+        <div>
+          <div>
+            <h3 th:text=" 'Contacto numero: ' + ${entry.id}"> </h3>
+            <h2><span th:text="${entry.nombre} +' '+${entry.apellido1}+' '+${entry.apellido2} ">Contacto</span></h2>
+            <p>------------- <a th:href="@{/editarContacto/{id}(id=${entry.id})}">Editar</a> -------------</p>
+          </div>
+          <div class="tl-body">
+            <p><span th:text=" 'Telefono: '+ ${entry.telefono}"></span></p>
+            <p><span th:text=" 'E-mail: '+ ${entry.email}"></span></p>
+            <h4>Cliente asociado</h4>
+            <p><span th:text=" 'Razon social: '+ ${entry.cliente.razonSocial}"> </span></p>
+            <p><span th:text=" 'Cedula juridica: '+ ${entry.cliente.cedulaJuridica}"> </span></p>
+            <p><span th:text=" 'Direccion: '+ ${entry.cliente.direccion}"></span></p>
+            <p><span th:text=" 'Telefono: '+ ${entry.cliente.telefono}"></span></p>
+          </div>
+        </div>
+      </li>
+    </div>
+  </ul>
+</div>
+</body>
+</html>

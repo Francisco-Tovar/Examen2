@@ -17,7 +17,7 @@ public class Contacto {
     @JoinColumn(name = "CONTACTO_ID", referencedColumnName = "ID")
     private Cliente cliente;
 
-    public Contacto() {    }
+    public Contacto(){}
 
     public Contacto(Long id, String nombre, String apellido1, String apellido2, String telefono,
                     String email) {
@@ -75,6 +75,14 @@ public class Contacto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <title>TAyTC</title>
+</head>
+<body>
+<div>
+    <h1>Edicion de clientes</h1>
+    <p>------------- <a href="/">Cancelar</a> -------------</p>
+    <form action="#" th:action="@{/editarCliente/{id}(id=${id})}" th:object="${cliente}" method="post">
+        <div style="display: flex; flex-direction: column; max-width: 50%">
+            <label for="razon">Razon social</label>
+            <input type="text" th:field="*{razonSocial}" id="razon"/>
+
+            <label for="cedula">Cedula juridica</label>
+            <input type="text" th:field="*{cedulaJuridica}" id="cedula"/>
+
+            <label for="direccion">Direccion</label>
+            <input type="text" th:field="*{direccion}" id="direccion"/>
+
+            <label for="telefono">Numero de telefono</label>
+            <input type="number" th:field="*{telefono}" id="telefono"/>
+
+            <p>------------- <a th:href="@{/registrarContacto/{id}(id=${id})}">Agregar contacto</a> -------------</p>
+
+            <input type="submit" value="Aceptar cambios" >
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>

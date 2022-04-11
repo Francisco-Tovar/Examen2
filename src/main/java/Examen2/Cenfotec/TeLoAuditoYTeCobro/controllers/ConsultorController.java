@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ConsultorController {
@@ -17,8 +19,7 @@ public class ConsultorController {
     @Autowired
     ConsultorService consultorService;
 
-    @RequestMapping(value = "/registrarConsultor", method = RequestMethod.GET)
-    public String navegarRegistroConsultor(Model model){
+    public Model agregarOpciones(Model model){
         List options = new ArrayList<String>();
         options.add("ISO-Calidad");
         options.add("ISO-Procesos");
@@ -41,6 +42,12 @@ public class ConsultorController {
         status.add("Inactivo");
         model.addAttribute("status", status);
 
+        return model;
+    }
+
+    @RequestMapping(value = "/registrarConsultor", method = RequestMethod.GET)
+    public String navegarRegistroConsultor(Model model){
+        model = agregarOpciones(model);
         model.addAttribute(new Consultor());
         return "registrarConsultor";
     }
@@ -57,4 +64,23 @@ public class ConsultorController {
         return "listarConsultores";
     }
 
+    @RequestMapping(value = "/editarConsultor/{id}")
+    public String irAEditarConsultor(Model model, @PathVariable int id) {
+        Optional<Consultor> consultorToEdit = consultorService.getById(id);
+        if (consultorToEdit.isPresent()){
+            model.addAttribute("consultor", consultorToEdit);
+            model = agregarOpciones(model);
+            return "editarConsultor";
+        } else {
+            return "notFound";
+        }
+    }
+
+    @RequestMapping(value = "/editarConsultor/{id}", method = RequestMethod.POST)
+    public String guardarCambios(Consultor consultor, BindingResult result,Model model,
+                                 @PathVariable int id) {
+        consultorService.update(consultor);
+        return "exito";
+    }
+    
 }

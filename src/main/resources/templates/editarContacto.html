@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <title>TAyTC</title>
+</head>
+<body>
+<div>
+    <h1>Edicion de contactos</h1>
+    <p>------------- <a href="/">Cancelar</a> -------------</p>
+    <form action="#" th:action="@{/editarContacto/{id}(id=${id})}" th:object="${contacto}" method="post">
+        <div style="display: flex; flex-direction: column; max-width: 50%">
+            <label for="nombre">Nombre</label>
+            <input type="text" th:field="*{nombre}" id="nombre"/>
+
+            <label for="apellido1">Primer apellido</label>
+            <input type="text" th:field="*{apellido1}" id="apellido1"/>
+
+            <label for="apellido2">Segundo apellido</label>
+            <input type="text" th:field="*{apellido2}" id="apellido2"/>
+
+            <label for="telefono">Numero de telefono</label>
+            <input type="number" th:field="*{telefono}" id="telefono"/>
+
+            <label for="email">E-mail</label>
+            <input type="text" th:field="*{email}" id="email"/>
+
+            <input type="submit" value="Guardar cambios" >
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>

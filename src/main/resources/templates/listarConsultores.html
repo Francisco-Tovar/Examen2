@@ -8,7 +8,7 @@
 <body>
 <div>
   <h1>Listado de consultores</h1>
-  <a href="/"> Volver al index </a>
+  <a href="/"> Volver al inicio </a>
   <ul>
     <div th:each="entry,status : ${consultores}">
       <li>
@@ -16,16 +16,17 @@
           <div>
             <h3 th:text=" 'Consultor numero: ' + ${entry.id}"> </h3>
             <h2><span th:text="${entry.nombre} +' '+${entry.apellido1}+' '+${entry.apellido2} ">Consultor</span></h2>
+            <p>------------- <a th:href="@{/editarConsultor/{id}(id=${entry.id})}">Editar</a> -------------</p>
           </div>
           <div class="tl-body">
             <p><span th:text=" 'Fecha de nacimiento: '+ ${entry.dateString}"> </span></p>
             <p><span th:text=" 'Direccion: '+ ${entry.direccion}"></span></p>
             <p><span th:text=" 'Telefono: '+ ${entry.telefono}"></span></p>
             <p><span th:text=" 'Celular: '+ ${entry.telPersonal}"></span></p>
-            <p><span th:text=" 'Email: '+ ${entry.email}"></span></p>
+            <p><span th:text=" 'E-mail: '+ ${entry.email}"></span></p>
             <p><span th:text=" 'Especialidad: '+ ${entry.especialidad}"></span></p>
             <p><span th:text=" 'Disponibible para viajar: '+ ${entry.disponibilidad}"></span></p>
-            <p><span th:text=" 'Activo: '+ ${entry.estatus}"></span></p>
+            <h4><span th:text=" 'Estado: '+ ${entry.estatus}"></span></h4>
           </div>
         </div>
       </li>
