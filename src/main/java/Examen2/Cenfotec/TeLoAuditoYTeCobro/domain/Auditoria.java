@@ -16,15 +16,15 @@ public class Auditoria {
 
     private Date fecha;
 
-    @OneToOne
-    @JoinColumn(name = "cliente_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CLIENTE_ID", referencedColumnName = "ID")
     private Cliente cliente;
 
-    @OneToOne
-    @JoinColumn(name = "consultor_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CONSULTOR_ID", referencedColumnName = "ID")
     private Consultor consultor;
 
-    public Auditoria() {    }
+    public Auditoria() {}
 
     public Auditoria(Long id, String fecha, Cliente cliente, Consultor consultor) throws ParseException {
         this.id = id;

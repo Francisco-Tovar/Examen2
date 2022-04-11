@@ -1,7 +1,7 @@
 package Examen2.Cenfotec.TeLoAuditoYTeCobro.domain;
-
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Cliente {
@@ -12,10 +12,12 @@ public class Cliente {
     private String cedulaJuridica;
     private String direccion;
     private String telefono;
-    @OneToMany
-    private ArrayList<Contacto> contactos;
 
-    public Cliente() {    }
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "CONTACTO_ID", referencedColumnName = "ID")
+    private List<Contacto> contactos;
+
+    public Cliente() {  }
 
     public Cliente(Long id, String razonSocial, String cedulaJuridica, String direccion, String telefono, ArrayList<Contacto> contactos) {
         this.id = id;
@@ -66,7 +68,7 @@ public class Cliente {
         this.telefono = telefono;
     }
 
-    public ArrayList<Contacto> getContactos() {
+    public List<Contacto> getContactos() {
         return contactos;
     }
 
@@ -74,6 +76,14 @@ public class Cliente {
         this.contactos = contactos;
     }
 
+    public String getAllContacts(){
+        String valor = "";
+        for (Contacto i : contactos) {
+            valor.concat( i.toString() + '\n' );
+        }
+        return valor;
+    }
+    
     @Override
     public String toString() {
         return "Cliente{" +
@@ -82,7 +92,7 @@ public class Cliente {
                 ", cedulaJuridica='" + cedulaJuridica + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", telefono='" + telefono + '\'' +
-                ", contactos=" + contactos +
+                ", contactos=" + getAllContacts() +
                 '}';
     }
 }

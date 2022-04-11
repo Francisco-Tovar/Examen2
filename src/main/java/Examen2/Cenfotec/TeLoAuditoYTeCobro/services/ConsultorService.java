@@ -14,22 +14,21 @@ public class ConsultorService {
     @Autowired
     ConsultorRepository consultorRepository;
 
-    public void save(Consultor consultor){
+    public void save(Consultor consultor) {
         consultorRepository.save(consultor);
     }
 
-    public List<Consultor> getAll(){
+    public List<Consultor> getAll() {
         return consultorRepository.findAll();
     }
 
-    public Optional<Consultor> getById(int id){
+    public Optional<Consultor> getById(int id) {
         return consultorRepository.findById(Long.valueOf(id));
     }
 
-    public void update(Consultor consultor){
+    public void update(Consultor consultor) {
         consultorRepository.save(consultor);
     }
-
 
 
 }

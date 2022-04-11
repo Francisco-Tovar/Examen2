@@ -1,9 +1,13 @@
 package Examen2.Cenfotec.TeLoAuditoYTeCobro.domain;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.time.Instant;
+
 
 @Entity
 public class Consultor {
@@ -18,30 +22,33 @@ public class Consultor {
     private Date dob;
     private String telPersonal;
     private String email;
-    private Boolean disponibilidad;
+    private String disponibilidad;
     private String especialidad;
-    private boolean estatus;
+    private String estatus;
 
     @Transient
     private SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 
     public Consultor() {
-        this.estatus = true;
+        setDisponibilidad("No");
+        setEstatus("Activo");
+        dob = new Date(System.currentTimeMillis());
     }
 
     public Consultor(String nombre, String apellido1, String apellido2, String direccion, String telefono,
-                     String dob, String telPersonal, String email, boolean disponibilidad, String especialidad) throws ParseException {
+                     Date dob, String telPersonal, String email, String disponibilidad, String especialidad,
+                     String estatus) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.dob = format.parse(dob);
+        this.dob = dob;
         this.telPersonal = telPersonal;
         this.email = email;
         this.disponibilidad = disponibilidad;
         this.especialidad = especialidad;
-        this.estatus = true;
+        this.estatus = estatus;
     }
 
     public Long getId() {
@@ -100,7 +107,7 @@ public class Consultor {
         this.dob = dob;
     }
 
-    public String getDateString(){
+    public String getDateString() {
         return format.format(dob);
     }
 
@@ -128,34 +135,36 @@ public class Consultor {
         this.especialidad = especialidad;
     }
 
-    public boolean isEstatus() {
-        return estatus;
-    }
-    public void setEstatus(Boolean estatus) {
-        this.estatus = estatus;
-    }
-
-    public Boolean getDisponibilidad() {
+    public String getDisponibilidad() {
         return disponibilidad;
     }
 
-    public void setDisponibilidad(Boolean disponibilidad) {
+    public void setDisponibilidad(String disponibilidad) {
         this.disponibilidad = disponibilidad;
+    }
+
+    public String getEstatus() {
+        return estatus;
+    }
+
+    public void setEstatus(String estatus) {
+        this.estatus = estatus;
     }
 
     @Override
     public String toString() {
         return "Consultor{" +
-                "nombre='" + nombre + + '\n'+
-                ", apellido1='" + apellido1 +  '\n'+
-                ", apellido2='" + apellido2 +  '\n'+
-                ", direccion='" + direccion +  '\n'+
-                ", telefono='" + telefono +  '\n'+
-                ", fecha de nacimiento=" + getDateString() +  '\n'+
-                ", telefono Personal='" + telPersonal +  '\n'+
-                ", email='" + email +  '\n'+
-                ", disponibilidad='" + disponibilidad.toString() +  '\n'+
-                ", especialidad='" + especialidad +  '\n'+
+                "nombre='" + nombre + '\'' +
+                ", apellido1='" + apellido1 + '\'' +
+                ", apellido2='" + apellido2 + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", fecha de nacimiento=" + getDateString() + '\'' +
+                ", telefono Personal='" + telPersonal + '\'' +
+                ", email='" + email + '\'' +
+                ", disponibilidad='" + disponibilidad + '\'' +
+                ", especialidad='" + especialidad + '\'' +
+                ", estatus='" + estatus + '\'' +
                 '}';
     }
 }

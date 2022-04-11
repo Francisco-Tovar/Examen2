@@ -1,9 +1,6 @@
 package Examen2.Cenfotec.TeLoAuditoYTeCobro.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Contacto {
@@ -16,9 +13,14 @@ public class Contacto {
     private String telefono;
     private String email;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CONTACTO_ID", referencedColumnName = "ID")
+    private Cliente cliente;
+
     public Contacto() {    }
 
-    public Contacto(Long id, String nombre, String apellido1, String apellido2, String telefono, String email) {
+    public Contacto(Long id, String nombre, String apellido1, String apellido2, String telefono,
+                    String email) {
         this.id = id;
         this.nombre = nombre;
         this.apellido1 = apellido1;

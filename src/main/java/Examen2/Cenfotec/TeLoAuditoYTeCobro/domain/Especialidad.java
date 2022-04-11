@@ -1,10 +1,11 @@
 package Examen2.Cenfotec.TeLoAuditoYTeCobro.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Especialidad {
 
-    private ArrayList<String> especialidades;
+    private List<String> especialidades;
 
     public Especialidad() {
         especialidades = new ArrayList<String>();
@@ -15,7 +16,7 @@ public class Especialidad {
         especialidades.add("Seguridad de IT");
     }
 
-    public ArrayList<String> getEspecialidades() {
+    public List<String> getEspecialidades() {
         return especialidades;
     }
 }
