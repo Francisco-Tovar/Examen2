@@ -55,8 +55,14 @@ public class ClienteController {
 
     @RequestMapping(value = "/editarCliente/{id}", method = RequestMethod.POST)
     public String guardarCambios(Cliente cliente, BindingResult result,Model model, @PathVariable int id) {
-        clienteService.update(cliente);
-        return "exito";
+        Optional<Cliente> clienteToEdit = clienteService.getById(id);
+        if (clienteToEdit.isPresent()){
+            cliente.setContactos(clienteToEdit.get().getContactos());
+            clienteService.update(cliente);
+            return "exito";
+        } else {
+            return "notFound";
+        }
     }
 
     @RequestMapping(value = "/registrarContacto/{id}")
@@ -121,5 +127,28 @@ public class ClienteController {
             return "notFound";
         }
     }
+
+    @RequestMapping(value = "/borrarContacto/{id}")
+    public String borrarContacto(Contacto contacto, BindingResult result,Model model, @PathVariable int id) {
+        Optional<Contacto> contactoToEdit = contactoService.getById(id);
+        if (contactoToEdit.isPresent()){
+            contacto.setCliente(contactoToEdit.get().getCliente());
+            List<Contacto> listaContactos = contacto.getCliente().getContactos();
+            Cliente tempCliente = contacto.getCliente();
+
+            for (int i = 0; i < listaContactos.size(); i++) {
+                if (contactoToEdit.get().getId() == listaContactos.get(i).getId()){
+                    listaContactos.remove(i);
+                }
+            }
+            tempCliente.setContactos(listaContactos);
+            clienteService.update(tempCliente);
+            contactoService.delete(id);
+            return "exito";
+        } else {
+            return "notFound";
+        }
+    }
+
 
 }

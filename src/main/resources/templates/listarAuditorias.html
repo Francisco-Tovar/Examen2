@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"></meta>
+  <meta http-equiv="Content-Type" content="text/html"></meta>
+  <title>TAyTC</title>
+</head>
+<body>
+<div>
+  <h1>Listado de auditorias</h1>
+  <a href="/"> Volver al inicio </a>
+  <ul>
+    <div th:each="entry,status : ${auditorias}">
+      <li>
+        <div>
+          <div>
+            <h3 th:text=" 'Auditoria numero: ' + ${entry.id}"> </h3>
+          </div>
+          <div class="tl-body">
+            <p><span th:text=" 'Fecha: '+ ${entry.dateString}"> </span></p>
+            <p><span th:text=" 'Cliente: '+ ${entry.cliente.razonSocial}"></span></p>
+            <p><span th:text=" 'Auditor: '+ ${entry.consultor.nombre} + ' ' + ${entry.consultor.apellido1}+ ' ' +
+                ${entry.consultor.apellido2}"></span></p>
+            <p><span th:text=" 'Area: '+ ${entry.especialidad}"></span></p>
+            <p> - <a th:href="@{/editarAuditoria/{id}(id=${entry.id})}">Editar</a> - </p>
+          </div>
+        </div>
+      </li>
+    </div>
+  </ul>
+</div>
+</body>
+</html>

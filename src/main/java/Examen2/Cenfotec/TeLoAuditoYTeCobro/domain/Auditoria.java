@@ -3,7 +3,7 @@ package Examen2.Cenfotec.TeLoAuditoYTeCobro.domain;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class Auditoria {
@@ -24,13 +24,27 @@ public class Auditoria {
     @JoinColumn(name = "CONSULTOR_ID", referencedColumnName = "ID")
     private Consultor consultor;
 
-    public Auditoria() {}
+    private String especialidad;
 
-    public Auditoria(Long id, String fecha, Cliente cliente, Consultor consultor) throws ParseException {
+    public Auditoria() {
+        this.fecha = new java.sql.Date(System.currentTimeMillis());
+    }
+
+    public Auditoria(Long id, Date fecha, Cliente cliente, Consultor consultor, String especialidad) throws ParseException {
         this.id = id;
-        this.fecha = format.parse(fecha);;
+        this.fecha = fecha;
+        ;
         this.cliente = cliente;
         this.consultor = consultor;
+        this.especialidad = especialidad;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
     }
 
     public Long getId() {
@@ -48,28 +62,34 @@ public class Auditoria {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
     public Cliente getCliente() {
         return cliente;
     }
+
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
     public Consultor getConsultor() {
         return consultor;
     }
+
     public void setConsultor(Consultor consultor) {
         this.consultor = consultor;
     }
-    public String getDateString(){
+
+    public String getDateString() {
         return format.format(fecha);
     }
+
     @Override
     public String toString() {
         return "Auditoria{" +
-                "id=" + id +  '\n'+
-                ", fecha=" + getDateString() + '\n'+
-                ", cliente=" + cliente.toString() +'\n'+
-                ", consultor=" + consultor.toString() +'\n'+
+                "id=" + id + '\n' +
+                ", fecha=" + getDateString() + '\n' +
+                ", cliente=" + cliente.toString() + '\n' +
+                ", consultor=" + consultor.toString() + '\n' +
                 '}';
     }
 }

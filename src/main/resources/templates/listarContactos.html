@@ -17,6 +17,7 @@
             <h3 th:text=" 'Contacto numero: ' + ${entry.id}"> </h3>
             <h2><span th:text="${entry.nombre} +' '+${entry.apellido1}+' '+${entry.apellido2} ">Contacto</span></h2>
             <p>------------- <a th:href="@{/editarContacto/{id}(id=${entry.id})}">Editar</a> -------------</p>
+            <p>------------- <a th:href="@{/borrarContacto/{id}(id=${entry.id})}">Borrar</a> -------------</p>
           </div>
           <div class="tl-body">
             <p><span th:text=" 'Telefono: '+ ${entry.telefono}"></span></p>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <title>TAyTC</title>
+</head>
+<body>
+<div>
+    <h1>Registro de auditoria</h1>
+    <p>------------- <a href="/">Cancelar</a> -------------</p>
+    <form action="#" th:action="@{/registrarAuditoria}" th:object="${auditoria}" method="post">
+        <div style="display: flex; flex-direction: column; max-width: 50%">
+
+            <label for="fecha">Fecha de auditoria</label>
+            <input type="date" th:field="*{fecha}" id="fecha"/>
+
+            <label for="especialidad">Especialidad</label>
+            <select th:field="*{especialidad}" class="form-control" id="especialidad">
+                <option th:each="especialidad : ${options}" th:value="${especialidad}"
+                        th:text="${especialidad}" ></option>
+            </select>
+
+            <label for="cliente">Cliente</label>
+            <select th:field="*{cliente}" class="form-control" id="cliente">
+                <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.razonSocial}" ></option>
+            </select>
+
+            <label for="auditor">Auditor</label>
+            <select th:field="*{consultor}" class="form-control" id="auditor">
+                <option th:each="consultor : ${consultores}" th:value="${consultor.id}"
+                        th:text="${consultor.nombre}+' '+${consultor.apellido1} +' '+ ${consultor.apellido2}" ></option>
+            </select>
+
+                <input type="submit" value="Registrar" >
+        </div>
+
+    </form>
+
+</div>
+</body>
+</html>
