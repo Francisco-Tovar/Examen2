@@ -22,7 +22,7 @@
             <p><span th:text=" 'Auditor: '+ ${entry.consultor.nombre} + ' ' + ${entry.consultor.apellido1}+ ' ' +
                 ${entry.consultor.apellido2}"></span></p>
             <p><span th:text=" 'Area: '+ ${entry.especialidad}"></span></p>
-            <p> - <a th:href="@{/editarAuditoria/{id}(id=${entry.id})}">Editar</a> - </p>
+            <p> - <a th:href="@{/editarAuditoria/{id}(id=${entry.id})}">Editar</a> -- <a th:href="@{/borrarAuditoria/{id}(id=${entry.id})}">Borrar</a> - </p>
           </div>
         </div>
       </li>

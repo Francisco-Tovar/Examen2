@@ -68,6 +68,7 @@ public class AuditoriaController {
 
     @RequestMapping(value = "/editarAuditoria/{id}")
     public String irAEditarAuditoria(Model model, @PathVariable int id) {
+        model = agregarOpciones(model);
         Optional<Auditoria> auditoriaToEdit = auditoriaService.getById(id);
         if (auditoriaToEdit.isPresent()){
             model.addAttribute("auditoria", auditoriaToEdit);
@@ -81,6 +82,12 @@ public class AuditoriaController {
     public String guardarCambios(Auditoria auditoria, BindingResult result,Model model,
                                  @PathVariable int id) {
         auditoriaService.update(auditoria);
+        return "exito";
+    }
+
+    @RequestMapping(value = "/borrarAuditoria/{id}")
+    public String borrarAuditoria(Auditoria auditoria, BindingResult result,Model model, @PathVariable int id) {
+        auditoriaService.delete(id);
         return "exito";
     }
     
